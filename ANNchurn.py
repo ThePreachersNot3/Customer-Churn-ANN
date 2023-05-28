@@ -131,9 +131,3 @@ print(classification_report(y_test, y_pred2))
 cf = confusion_matrix(y_test, y_pred2)
 sns.heatmap(cf, annot=True)
 #plt.show()
-
-
-
-
-
-

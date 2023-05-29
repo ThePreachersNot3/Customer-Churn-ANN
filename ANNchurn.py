@@ -11,6 +11,9 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, classification_report, confusion_matrix
+from sklearn.model_selection import GridSearchCV
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 #read the dataset in
 df = pd.read_csv('DeepLearning\\churn.csv')
@@ -120,6 +123,42 @@ y_pred = model.predict(X_test)
 
 
 #using machine learning
+
+#parameter tuning lib, containing model and parameters i want to loop through
+'''model_lib = {'lr' : {
+    'model':LogisticRegression(),
+             'params' : {
+                 'C':[1,2,3,4,5,6,7,8,9,10,20,40],
+                 'penalty':['l1','l2']
+                       }
+             },
+             'knn' : {
+                 'model' : KNeighborsClassifier(),
+                 'params' : {
+                     'n_neighbors':[5,7,3,4,6],
+                     'weights' :['uniform','distance'],
+                     'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']
+                }
+                     
+        },
+             'd_tree':{
+                 'model': DecisionTreeClassifier(),
+                 'params': {
+                     'criterion': ["gini", "entropy", "log_loss"],
+                     'splitter': ["best", "random"]
+                }
+        }
+}
+result = []
+for model, p in model_lib.items():
+    gsc = GridSearchCV(p['model'],p['params'], return_train_score=False)
+    gsc.fit(X_train,y_train)
+    result.append({
+        'model_name':model,
+        'best params':gsc.best_params_,
+        'best score' :gsc.best_score_
+    })
+print(pd.DataFrame(result))'''
 
 lr = LogisticRegression()
 lr.fit(X_train, y_train)
